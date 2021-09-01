@@ -1,6 +1,6 @@
 #!/bin/sh
 # 读取配置文件
-source push_setting
+source conf
 # 检测直播源
 if [[ $1 =~ twitch ]]; then
    echo "twitch直播"
