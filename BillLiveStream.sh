@@ -38,6 +38,6 @@ while :; do               #loop循环，为了让模块一直运行
    else
       echo $DATE "ffmpeg没有在运行" >>/var/log/ffmpeg-error.log
       echo $DATE "开始运行ffmpeg" >>/var/log/ffmpeg.log
-      ffmpeg -i $M3U8 -vcodec copy -acodec aac -f flv $BILL_RTMP_URL
+      ffmpeg -re -i $M3U8 -vcodec copy -acodec aac -f flv $BILL_RTMP_URL
    fi
 done
