@@ -4,7 +4,7 @@ BILL_RTMP_URL='<填写你自己的推流地址>'
 proxy='<填写你自己的代理地址>'
 cookie="<填写cookie>"
 # 填写直播间号码
-roomid='<填写直播间号码>'
+room_id='<填写直播间号码>'
 # 填写开播分区
 area='<开播分区>'
 csrf_token='<csrf_token>'
