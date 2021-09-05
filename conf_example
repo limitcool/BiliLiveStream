@@ -8,3 +8,5 @@ room_id='<填写直播间号码>'
 # 填写开播分区
 area='<开播分区>'
 csrf_token='<csrf_token>'
+# 填写钉钉机器人token
+access_token='<钉钉机器人token>'

@@ -1,6 +1,13 @@
 #!/bin/sh
-# 读取配置文件
 DATE=$(date +%y-%m-%d-%H:%M:%S)
+if [ ! -n "$1" ]; then
+   echo -e "\033[31m 没有输入转播地址,正在退出程序。 \033[0m"
+   echo $DATE "没有输入转播地址" >>/var/log/ffmpeg-error.log
+   exit 1
+else
+   :
+fi
+# 读取配置文件
 source conf
 # 检测直播源
 if [[ $1 =~ twitch ]]; then
@@ -37,6 +44,16 @@ startlive=$(
       --data-urlencode "csrf_token=${csrf_token}" \
       --data-urlencode "csrf=${csrf_token}"
 )
+# 判断是否开播成功
+if [ $? -ne 0 ]; then
+   echo -e "\033[31m 开启直播失败,请检查Cookie \033[0m"
+else
+   echo "$DATE 开启直播成功"
+   echo "$DATE 开启直播成功" >>/var/log/ffmpeg.log
+   curl --location --request POST "https://oapi.dingtalk.com/robot/send?access_token=${access_token}" \
+   --header 'Content-Type: application/json' \
+   --data-raw '{"msgtype": "text","text": {"content":"B站开启直播成功o(*￣▽￣*)ブ"}}'
+fi
 echo "$DATE 开播接口返回" $startlive >>/var/log/ffmpeg.log
 
 while :; do               #loop循环，为了让模块一直运行
